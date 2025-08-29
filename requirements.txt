@@ -1,0 +1,15 @@
+pip
+fastapi
+uvicorn
+rich
+hvac
+mysqlclient
+phpipam_client
+pysnow
+requests
+rich
+rich_argparse
+text_unidecode
+urllib3
+inquirer
+xlsxwriter
