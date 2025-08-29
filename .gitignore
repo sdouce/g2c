@@ -1,0 +1,25 @@
+﻿# --- Secrets ---
+.env
+*.env
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# --- Virtualenv ---
+.venv/
+venv/
+ENV/
+
+# --- Logs ---
+*.log
+
+# --- VSCode ---
+.vscode/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
