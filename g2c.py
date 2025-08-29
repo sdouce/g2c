@@ -9,10 +9,7 @@ load_dotenv()
 GLPI_URL   = os.getenv("GLPI_URL")
 USER_TOKEN = os.getenv("GLPI_USER_TOKEN")
 APP_TOKEN  = os.getenv("GLPI_APP_TOKEN")
-# Configuration
-# GLPI_URL = "http://51.75.119.108:81/apirest.php"
-# USER_TOKEN = "IBCfU8Sz9pGDJ7Ts5uHqEFfcqmkRhz9J01AhYQDQ"
-# APP_TOKEN = "HlnFeNdQzZZU2Hm3HGxpMUundkwbwwhHMW3VcPlg"
+
 
 # Headers init
 headers = {
