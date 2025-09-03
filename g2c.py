@@ -1,6 +1,6 @@
 import requests
 from rich import print
-import os
+import os,sys
 from dotenv import load_dotenv
 
 # charge les variables depuis .env
@@ -29,16 +29,10 @@ headers_session = {
 }
 
 
-# 2. Récupération des searchOptions
-resp = requests.get(f"{GLPI_URL}/listSearchOptions/Computer", headers=headers_session, verify=False)
-resp.raise_for_status()
-options = resp.json()
-# print(options)
-
 criteria = {
     "criteria[0][field]": "1",
     "criteria[0][searchtype]": "equal",
-    "criteria[0][value]": "TEST",
+    "criteria[0][value]": "mauresque",
     "forcedisplay[0]": "2"
 }
 
@@ -49,21 +43,38 @@ search = requests.get(
     verify=False
 )
 data = search.json()
-print(data)
+
+
 comp_id=data['data'][0]['2']
-print(comp_id)
+
+
 computer_dict = requests.get(
+    f"{GLPI_URL}/Computer/{comp_id}?with_disks=true",
+    headers=headers_session,
+    verify=False
+)
+DICO_GLPI=computer_dict.json()
+print(DICO_GLPI)
+sys.exit()
+
+computer_dict_OS = requests.get(
     f"{GLPI_URL}/Computer/{comp_id}/Item_OperatingSystem",
     headers=headers_session,
     verify=False
 )
-print(computer_dict.json())
-OS_ID=computer_dict.json()[0]['operatingsystems_id']
+print(computer_dict_OS.json())
+
+
+OS_ID=computer_dict_OS.json()[0]['operatingsystems_id']
 OS_DICT = requests.get(
     f"{GLPI_URL}/OperatingSystem/{OS_ID}",
     headers=headers_session,
     verify=False
 )
 print(OS_DICT.json())
+
+
+DICO_GLPI['OS']=OS_DICT.json()
+print(DICO_GLPI)
 
 requests.get(f"{GLPI_URL}/killSession", headers=headers_session, verify=False)
